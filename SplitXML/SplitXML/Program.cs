@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL;
+using System;
+using System.IO;
 
 namespace SplitXML
 {
@@ -6,7 +8,24 @@ namespace SplitXML
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string sourceFile = @"C:\FileName.xml";
+            string destFilePrefix = "FileNameNew";
+            string destPath = @"C:\Result\";
+            string rootElement = "ITEMS";
+            string descElement = "ITEM";
+            int take = 2000000;
+
+            if (!File.Exists(sourceFile))
+            {
+                throw new Exception($"Not find file ({sourceFile})");
+            }
+
+            new SplitterXML().SplitXmlFile(sourceFile,
+                rootElement,
+                descElement,
+                take,
+                destFilePrefix,
+                destPath);
         }
     }
 }
